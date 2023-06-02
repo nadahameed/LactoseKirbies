@@ -19,10 +19,19 @@ project 5
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-ALL -- 2023-05-30 9:07
+ALL --- 2023-05-30 9:07
 --------------------------------------------------------------
 * initialized repo with necessary files
 * created devlog and design doc
 * registration
 * thought about our project
+==============================================================
+
+ALL --- 2023-06-02 9:05
+--------------------------------------------------------------
+Peer Reviewing Findings:
+* we should add an achievements page
+* we can add a timer
+* we can use chat gpt to help us generate a framework first
+* we can use an api for profile pictures
 ==============================================================
