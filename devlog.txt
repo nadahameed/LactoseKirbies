@@ -34,4 +34,5 @@ Peer Reviewing Findings:
 * we can add a timer
 * we can use chat gpt to help us generate a framework first
 * we can use an api for profile pictures
+* viewing other people's profiles should be an option
 ==============================================================
