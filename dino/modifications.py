@@ -35,6 +35,7 @@ class Dinosaur(pygame.sprite.Sprite):
                 if self.jump_count < 0:
                     neg = -1
                 self.rect.y -= (self.jump_count ** 2) * 0.5 * neg
+                # self.rect.x += (self.jump_count ** 2) * 0.5 * neg
                 self.jump_count -= 1
             else:
                 self.is_jumping = False
