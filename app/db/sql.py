@@ -1,20 +1,23 @@
 import sqlite3 
 
 def get_connection():
-  conn = sqlite3.connect("app/db/milk.db")
+  conn = sqlite3.connect("app/db/milk.db", check_same_thread=False)
   return conn
 
 
-def query_db(query, args=(), all=False, execute_many=False):
+def query_db(query, args=(), all=False, execute_many=False, commit=False):
   conn = get_connection()
 
   with conn:
-      cur = conn.cursor()
-      if execute_many:
-          r = cur.executemany(query, args)
-      else:
-          r = cur.execute(query, args)
-      r = cur.fetchall()
-  conn.close()
+    cur = conn.cursor()
+    if execute_many:
+        r = cur.executemany(query, args)
+    else:
+        r = cur.execute(query, args)
+    r = cur.fetchall()
 
+  if commit:
+    conn.commit()
+
+  conn.close()
   return (r[0] if r else None) if not all else r
