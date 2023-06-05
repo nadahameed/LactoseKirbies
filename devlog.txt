@@ -36,3 +36,9 @@ Peer Reviewing Findings:
 * we can use an api for profile pictures
 * viewing other people's profiles should be an option
 ==============================================================
+
+NadaH --- 2023-06-05 6:54
+--------------------------------------------------------------
+* updated design doc according to feedback received
+* added some stretch goals based on ideas other teams gave us
+==============================================================
