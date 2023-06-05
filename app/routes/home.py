@@ -5,8 +5,6 @@ sys.path.append("..")
 
 from flask import Blueprint, render_template, request, session
 
-from database import user
-
 # Create the blueprint
 home_bp = Blueprint('home', __name__)
 

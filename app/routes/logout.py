@@ -3,7 +3,7 @@ import sys
 
 sys.path.append("..")
 from flask import Blueprint, redirect, session, request, url_for, session  # web server essentials
-from database import user
+from db import user
 #from middleware import check_auth
 
 def check_auth():

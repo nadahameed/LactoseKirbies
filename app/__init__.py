@@ -24,18 +24,6 @@ app.secret_key = b64.base64_encode(
 def before_request():
     request.db = db """
 
-@app.route("/")
-def home():
-    return render_template("home.html")
-
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/register")
-def register():
-    return render_template("register.html")
-
 
 if __name__ == "__main__":  # false if this file imported as module
     # enable debugging, auto-restarting of server when this file is modified
