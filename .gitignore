@@ -123,6 +123,9 @@ _*
 Thumbs.db
 ehthumbs.db
 
+# Our DB Files #
+milk.db
+
 # Filenames with special characters
 **/*[\\/\:;*?!'"<>|$º•¶§∞¢£]*
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
