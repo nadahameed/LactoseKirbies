@@ -251,7 +251,7 @@ def main(winstyle=0):
     Player.images = [img, pg.transform.flip(img, 1, 0)]
     img = load_image("explosion1.gif")
     Explosion.images = [img, pg.transform.flip(img, 1, 1)]
-    Alien.images = [load_image(im) for im in ("alien1.gif")]
+    Alien.images = [load_image("alien1.gif")]
     Bomb.images = [load_image("explosion1.gif")]
     Shot.images = [load_image("explosion1.gif")]
 
@@ -356,8 +356,8 @@ def main(winstyle=0):
 
         # Detect collisions between aliens and players.
         for alien in pg.sprite.spritecollide(player, aliens, 1):
-            if pg.mixer and boom_sound is not None:
-                boom_sound.play()
+            # if pg.mixer and boom_sound is not None:
+            #     boom_sound.play()
             Explosion(alien, all)
             Explosion(player, all)
             SCORE = SCORE + 1
