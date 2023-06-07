@@ -2,7 +2,7 @@ from .sql import query_db
 
 # general method that can be used to get data easier
 def select_from(table, data_want, datagive, datalabel_give):
-    temp = query_db(f"SELECT {data_want} FROM {table} WHERE {datalabel_give} = '{datagive}'", all=True)
+    temp = query_db(f"SELECT {data_want} FROM {table} WHERE {datalabel_give} = ?", (datagive,), all=True)
     if(len(temp) > 0):
         return temp[0][0]
     else:
@@ -26,7 +26,7 @@ def signup(username, password):
 # this method is prob not needed but we can add a feature for deleting account or smth
 def remove_user(username):
     try:
-        query_db(f'DELETE FROM users WHERE username = "{username}"', commit=True)
+        query_db(f"DELETE FROM users WHERE username = ?", (username,), commit=True)
         return True
     except:
         return False
@@ -39,4 +39,7 @@ def login(username, password):
     return False
 
 def edit_username(old_username, username):
-    query_db(f"UPDATE users SET username = '{username}' WHERE username = '{old_username}'", commit=True)
+    query_db(f"UPDATE users SET username = ? WHERE username = ?", (username, old_username), commit=True)
+
+def updatehigh(datagive, datalabel_give):
+    query_db(f"")
