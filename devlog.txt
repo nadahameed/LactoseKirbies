@@ -42,3 +42,9 @@ NadaH --- 2023-06-05 6:54
 * updated design doc according to feedback received
 * added some stretch goals based on ideas other teams gave us
 ==============================================================
+
+JasmineY --- 2023-06007 9:15
+--------------------------------------------------------------
+* wrote (started) how-to for pygame
+* exploring pygame's capabilities
+==============================================================
