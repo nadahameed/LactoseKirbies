@@ -24,6 +24,7 @@ class Dinosaur(pygame.sprite.Sprite):
         self.rect.center = (100, window_height - 50)
         self.is_jumping = False
         self.jump_count = 10
+        #default = self.rect
     
     def update(self):
         keys = pygame.key.get_pressed()
@@ -39,6 +40,7 @@ class Dinosaur(pygame.sprite.Sprite):
                 self.jump_count -= 1
             else:
                 self.is_jumping = False
+                #self.rect.y = default
                 self.jump_count = 10
     
     def draw(self, surface):
