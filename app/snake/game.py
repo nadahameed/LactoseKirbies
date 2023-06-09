@@ -25,9 +25,13 @@ clock = pygame.time.Clock()
 
 font_style = pygame.font.SysFont(None, 30)
 
+background_image = pygame.image.load("data/background.png")
+background_rect = background_image.get_rect()
+
+waiting_room_img = pygame.image.load("data/waitingroom.png")
 
 def display_score(score):
-    text = font_style.render("Score: " + str(score), True, black)
+    text = font_style.render("Score: " + str(score), True, white)
     window.blit(text, [0, 0])
 
 
@@ -67,10 +71,10 @@ def game_loop():
     while not game_over:
 
         while game_close:
-            window.fill(white)
-            message = "Game Over! Press Q-Quit or C-Play Again"
-            text = font_style.render(message, True, red)
-            window.blit(text, [width / 6, height / 3])
+            window.blit(waiting_room_img, background_rect)
+            message = "Game Over! Press Q to Quit or C to Play Again"
+            text = font_style.render(message, True, white)
+            window.blit(text, [width / 6, height / 2 - 20])
             display_score(score)
             pygame.display.update()
 
@@ -113,8 +117,9 @@ def game_loop():
         y1 += y1_change
 
         # Update the game window
-        window.fill(white)
-        pygame.draw.rect(window, white, [foodx, foody, block_size, block_size])
+        #window.fill(white)
+        window.blit(background_image, background_rect)
+        #pygame.draw.rect(window, white, [foodx, foody, block_size, block_size])
         snake_head = []
         snake_head.append(x1)
         snake_head.append(y1)
