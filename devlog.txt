@@ -48,3 +48,17 @@ JasmineY --- 2023-06007 9:15
 * wrote (started) how-to for pygame
 * exploring pygame's capabilities
 ==============================================================
+
+NadaH --- 2023-06-08 20:56
+--------------------------------------------------------------
+* used chatgpt to generate code for pong and snake
+* fooled around with different commands
+* created working games for pong and snake
+* customized games to make them kirby themed
+* as of right now, they don't run in the flask app (it's a popup)
+but never fear it'll be done soon
+* fooled around with pygame's premade space invaders but it's
+kind of hard to customize because it's an entirely new thing to learn
+(but that's why we have jasmine's handy-dandy tutorial)
+    - tried to customize it but it's very messy
+==============================================================
