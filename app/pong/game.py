@@ -1,5 +1,6 @@
 import pygame
 import random
+# from app.db.sql import *
 
 # Initialize pygame
 pygame.init()
@@ -117,4 +118,16 @@ while running:
     clock.tick(60)
 
 # Quit the game
+
+def add_score(user, game, score):
+  c = db.cursor()
+  c.execute("select game from users where (user=?)")
+  newScore = float(c.fetchone())
+  newScore += score
+  c.execute("REPLACE INTO table(game) where username=user VALUES(score)")
+  db.commit()
+  c.close()
+
+session_user = F"{get_username(session['ID'])}"
+add_score(session_user, "pong_high", score)
 pygame.quit()
