@@ -1,11 +1,12 @@
-import db.user as userdb #,import database as db
+import db.user as userdb 
+#import database as db
 from flask import Flask, request, jsonify, render_template
 
 from routes.home import home_bp
 from routes.login import login_bp
 from routes.logout import logout_bp
 from routes.register import register_bp
-#from routes.flightinfo import flightinfo_bp
+from routes.snake import snake_bp
 
 from tools import b64
 
@@ -15,7 +16,7 @@ app.register_blueprint(home_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(logout_bp)
 app.register_blueprint(register_bp)
-#app.register_blueprint(flightinfo_bp)
+app.register_blueprint(snake_bp)
 
 app.secret_key = b64.base64_encode(
     "very good secret key. it's really secure now that we encoded it into base64!")
