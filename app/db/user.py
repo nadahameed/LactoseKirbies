@@ -1,5 +1,11 @@
 from .sql import query_db
 
+def createTable(tblName):
+  query_db(f"CREATE TABLE IF NOT EXISTS {tblName} (username TEXT, password TEXT, pong_high INT, dino_high INT, crossy_high INT, time FLOAT)")
+
+def deleteTable(tblName):
+  query_db(f"DROP TABLE IF EXISTS {tblName}")
+
 # general method that can be used to get data easier
 def select_from(table, data_want, datagive, datalabel_give):
     temp = query_db(f"SELECT {data_want} FROM {table} WHERE {datalabel_give} = ?", (datagive,), all=True)
