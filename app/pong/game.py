@@ -1,5 +1,6 @@
 import pygame
 import random
+import sqlite3
 # from app.db.sql import *
 
 # Initialize pygame
@@ -120,14 +121,23 @@ while running:
 # Quit the game
 
 def add_score(user, game, score):
-  c = db.cursor()
-  c.execute("select game from users where (user=?)")
-  newScore = float(c.fetchone())
-  newScore += score
-  c.execute("REPLACE INTO table(game) where username=user VALUES(score)")
-  db.commit()
+  c = sqlite3.connect("../db/milk.db")
+  cur = c.cursor()
+  string = "select \"{}\" from users where (username=\"{}\");".format(game, user)
+  cur.execute(string)
+  oldHigh = float(cur.fetchone()[0])
+  if (oldHigh<score):
+    string = """
+    UPDATE users
+    SET {}={}
+    WHERE username=\"{}\";
+    """
+    string=string.format(game, score, user)
+    cur.execute(string)
+  c.commit()
   c.close()
 
-session_user = F"{get_username(session['ID'])}"
-add_score(session_user, "pong_high", score)
+#session_user = F"{get_username(session['ID'])}"
+#add_score(session_user, "pong_high", score)
+add_score("jasmine", "pong_high", score)
 pygame.quit()
