@@ -17,13 +17,13 @@ let ballSpeedY = 3; // Ball movement speed
 let score = 0;
 
 const ballImage = new Image();
-ballImage.src = "kirbyball.png"
+ballImage.src = "..static/assets/kirbyball.png"
 
 const bgImage = new Image();
 // bgImage.onload = function() {
 //   context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 // };
-bgImage.src = "background.png"
+bgImage.src = "..static/assets/background.png"
 
 
 // Block variables
