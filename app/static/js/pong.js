@@ -23,7 +23,7 @@ const bgImage = new Image();
 // bgImage.onload = function() {
 //   context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 // };
-bgImage.src = "..static/assets/background.png"
+//bgImage.src = "..static/assets/background.png"
 
 
 // Block variables
@@ -92,10 +92,10 @@ function drawPaddle() {
 
 // Draw the ball
 function drawBall() {
-  //context.fillStyle = "white";
-  context.drawImage(ballImage, ballX, ballY, ballRadius*5, ballRadius*5)
+  context.fillStyle = "white";
+  //context.drawImage(ballImage, ballX, ballY, ballRadius*5, ballRadius*5)
   context.beginPath();
-  //context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+  context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
   context.fill();
 }
 
@@ -183,7 +183,7 @@ function update(progress) {
 function render() {
   // Clear the canvas
   context.clearRect(0, 0, WIDTH, HEIGHT);
-  context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+  //context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
   // Draw the paddle
   drawPaddle();
