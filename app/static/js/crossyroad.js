@@ -9,22 +9,32 @@ $(document).ready(function() {
     var roadInterval;
     var genInterval;
     var playerX = 160;
-    var playerY = 400;
-    var cars = [];
-    var points = 0;
+    var playerY = 320;
+    var points = -8;
+    var maxPoints = 0;
 
     var generateRoad = function() {
         // console.log("generating road...");
-        var road = $('<div>').addClass('road').css('top', '-0px');
+        var road = $('<div>').addClass('road').css('top', '0px');
         player.before(road);
     };
 
+    var generateGrass = function() {
+        var grass = $('<div>').addClass('grass').css('top', '0px');
+        player.before(grass);
+    }
+
     var generateCar = function() {
         // console.log("generating car...");
-        var carPosition = Math.floor(Math.random() * (gameContainer.width() - 40));
-        var car = $('<div>').addClass('car').css('top', '0px').css('left', carPosition + 'px');
-        gameContainer.append(car);
-        cars.push(car);
+        var carPosition = (1 + Math.floor(Math.random() * 7)) * 40;
+        var carDirection;
+        if ((Math.floor(Math.random() * 2)) == 0) {
+            carDirection = 1;
+        } else {
+            carDirection = 3;
+        }
+        var car = $('<img src="static/assets/Bell.png">').addClass('car').css('top', '0px').css('left', carPosition + 'px').css('font-weight', carDirection);
+        player.before(car);
     };
 
     var moveRoads = function() {
@@ -39,48 +49,82 @@ $(document).ready(function() {
         });
     };
 
+    var moveGrass = function() {
+        // console.log("moving road...");
+        var grass = $('.grass');
+        grass.each(function() {
+                var topPosition = parseInt($(this).css('top'));
+                $(this).css('top', topPosition + gameSpeed + 'px');
+                if (topPosition >= gameContainer.height() - roadHeight) {
+                    $(this).remove();
+            }
+        });
+    };
+
     var moveCars = function() {
         // console.log("moving car...");
-        for (var i = 0; i < cars.length; i++) {
-            var car = cars[i];
-            var topPosition = parseInt(car.css('top'));
-            car.css('top', topPosition + gameSpeed + 'px');
-            if (topPosition >= gameContainer.height()) {
-                car.remove();
-                cars.splice(i, 1);
-                i--;
+        var cars = $('.car');
+        cars.each(function() {
+            var topPosition = parseInt($(this).css('top'));
+            topPosition += gameSpeed;
+            $(this).css('top', topPosition + 'px');
+            if (topPosition >= gameContainer.height() - roadHeight) {
+                $(this).remove();
             }
-            var leftPosition = parseInt(car.css('left'));
-            car.css('top', leftPosition + gameSpeed + 'px');
 
-        };
+        var leftPosition = parseInt($(this).css('left'));
+        var direction = parseInt($(this).css('font-weight')) -2;
+        leftPosition += (gameSpeed * direction)
+        if (direction == -1 && leftPosition < 20) {
+            leftPosition = 300;
+        } 
+        if (direction == 1 && leftPosition > 300) {
+            leftPosition = 20;
+        }
+        $(this).css('left', leftPosition + 'px');
+
+        });
     };
 
     var movePlayer = function() {
         // console.log("moving player...");
-       
-    }
+        playerY += gameSpeed;
+        player.css('top', playerY + 'px');
+    };
 
+   
+    var newPos; //helper variable
     document.addEventListener('keydown', function(e) {
         if (e.key == "D" || e.key == "d") { // D
-                playerX += movementInc;
+            newPos = playerX + movementInc;
+            if (newPos < gameContainer.width() -20) {
+                playerX = newPos;
                 player.css('left', playerX + 'px');
+            }
         } else if (e.key == "A" || e.key == "a") { // A
-                playerX -= movementInc;
+            newPos = playerX - movementInc;
+            if (newPos > 20) {
+                playerX = newPos;
                 player.css('left', playerX + 'px');
+            }
         } else if (e.key == "W" || e.key == "w") { // W
-                playerY -= movementInc;
+            newPos = playerY - movementInc;
+            if (newPos > 40) {
+                playerY = newPos;
                 player.css('top', playerY + 'px');
                 points += 1;
+            }
         } else if (e.key == "S" || e.key == "s") { // S
-                playerY += movementInc;
+            newPos = playerY + movementInc;
+            if (newPos < gameContainer.height() - 40) {
+                playerY = newPos;
                 player.css('top', playerY + 'px');
                 points -= 1;
+            }
         }
     });
 
     var checkCollision = function() {
-        // var roads = $('.road');
         var cars = $('.car');
         var playerTop = playerY;
         var playerBottom = playerY + player.height();
@@ -94,23 +138,26 @@ $(document).ready(function() {
             var carRight = carLeft + $(this).width();
 
             if (
-                (playerBottom >= carTop && playerTop <= carBottom) &&
-                ((playerLeft >= carLeft && playerLeft <= carRight) ||
-                (playerRight >= carLeft && playerRight <= carRight))
+                (playerBottom > carTop && playerTop < carBottom) &&
+                ((playerLeft > carLeft && playerLeft < carRight) ||
+                (playerRight > carLeft && playerRight < carRight))
             ) {
                 clearGame();
                 alert('Game Over!');
             }
         });
 
-        if (playerBottom >= gameContainer.height() + player.height()) {
+        if (playerBottom >= gameContainer.height() - 1) {
             clearGame();
             alert('Game Over!');
         }
     };
 
     var updateScore = function() {
-        pointsBar.innerHTML = "Points: " + points;
+        if (maxPoints < points) {
+            maxPoints = points;
+            pointsBar.innerHTML = "Points: " + maxPoints;
+        }
     }
 
 
@@ -126,14 +173,19 @@ $(document).ready(function() {
         console.log("starting game...");
         roadInterval = setInterval(function() {
             updateScore();
+            moveGrass();
             moveRoads();
-            //   moveCars();
+            moveCars();
             movePlayer();
             checkCollision();
         }, 100);
         genInterval = setInterval(function() {
-            generateRoad(); 
-            //   generateCar();
+            if (Math.floor(Math.random() * 2) == 0) {
+                generateRoad(); 
+                generateCar();
+            } else {
+                generateGrass();
+            }
         }, 800);
         isRunning = true;
         startButton.innerHTML = "Stop";
