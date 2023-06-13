@@ -9,7 +9,7 @@ from flask import Blueprint, render_template, request, session
 pong_bp = Blueprint('pong', __name__)
 
 
-@crossy_bp.route("/pong")
+@pong_bp.route("/pong")
 def home(*args, **kwargs):
     # Fetch the user from the database
 
