@@ -7,7 +7,7 @@ from routes.login import login_bp
 from routes.logout import logout_bp
 from routes.register import register_bp
 from routes.crossyroad import crossy_bp
-from routes.snake import snack_bp
+from routes.snake import snake_bp
 
 from tools import b64
 
