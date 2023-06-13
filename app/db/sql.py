@@ -21,3 +21,13 @@ def query_db(query, args=(), all=False, execute_many=False, commit=False):
 
   conn.close()
   return (r[0] if r else None) if not all else r
+
+def add_score(user, game, score):
+  c = db.cursor()
+  c.execute("select game from users where (user=?)")
+  newScore = float(c.fetchone())
+  newScore += score
+  c.execute("REPLACE INTO table(game) where username=user VALUES(score)")
+  db.commit()
+  c.close()
+

@@ -62,3 +62,15 @@ kind of hard to customize because it's an entirely new thing to learn
 (but that's why we have jasmine's handy-dandy tutorial)
     - tried to customize it but it's very messy
 ==============================================================
+
+
+NadaH --- 2023-06-11 21:57
+--------------------------------------------------------------
+* created space invaders (with ai's help)
+* everything's customized and kirby-themed
+* started working on routing to actually connect it to the flask app, that
+will come soon
+* as of right now, what's left to do is work on routing, high scores 
+and its display (achievements page basically), host it on a domain,
+and record a demo --> other video games are more of a stretch goal at this point
+==============================================================
