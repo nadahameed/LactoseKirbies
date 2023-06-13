@@ -17,10 +17,10 @@ let ballSpeedY = 3; // Ball movement speed
 let score = 0;
 
 const ballImage = new Image();
-ballImage.src = "data/kirbyball.png"
+ballImage.src = "../../pong/data/kirbyball.png"
 
 const bgImage = new Image();
-bgImage.src = "data/background.png"
+bgImage.src = "../../pong/data/background.png"
 
 
 // Block variables
