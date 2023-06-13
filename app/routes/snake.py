@@ -14,7 +14,6 @@ def snake(*args, **kwargs):
     # Fetch the user from the database
 
     if "username" in session:
-        return render_template("snake.html")
 
         import pygame
         import random
@@ -169,7 +168,7 @@ def snake(*args, **kwargs):
 
 
         game_loop()
-
+        return render_template("snake.html")
     else:
         return render_template("login.html")
         

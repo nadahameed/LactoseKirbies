@@ -7,6 +7,7 @@ from routes.login import login_bp
 from routes.logout import logout_bp
 from routes.register import register_bp
 from routes.crossyroad import crossy_bp
+from routes.pong import pong_bp
 from routes.snake import snake_bp
 
 from tools import b64
@@ -19,6 +20,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(logout_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(crossy_bp)
+app.register_blueprint(pong_bp)
 app.register_blueprint(snake_bp)
 
 app.secret_key = b64.base64_encode(
