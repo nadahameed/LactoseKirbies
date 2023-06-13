@@ -139,7 +139,7 @@ function collisionDetection() {
 }
 
 // Update game state
-function update() {
+function update(progress) {
   // Update paddle position
   updatePaddle();
 
@@ -198,11 +198,14 @@ function render() {
 }
 
 // Game loop
-function gameLoop() {
-  update();
-  render();
-  requestAnimationFrame(gameLoop);
+function gameLoop(timestamp) {
+  var progress = (timestamp - lastRender)
+  update(progress)
+  render()
+  lastRender = timestamp
+  window.requestAnimationFrame(gameLoop)
 }
 
 // Start the game loop
-gameLoop();
+var lastRender = 0
+window.requestAnimationFrame(gameLoop)
