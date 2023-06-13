@@ -1,7 +1,7 @@
 import sqlite3 
 
 def get_connection():
-  conn = sqlite3.connect("app/db/milk.db", check_same_thread=False)
+  conn = sqlite3.connect("milk.db", check_same_thread=False)
   return conn
 
 
