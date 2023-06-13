@@ -171,16 +171,15 @@ function update(progress) {
   collisionDetection();
 }
 
+const button = document.getElementById('mainButton')
+button.addEventListener('click', () => {
+  var lastRender = 0
+  window.requestAnimationFrame(gameLoop)
+})
+
 function reset() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  const button = document.createElement('button')
-  button.innerText = 'RESTART?'
-  button.id = 'mainButton'
-  button.addEventListener('click', () => {
-    var lastRender = 0
-    window.requestAnimationFrame(gameLoop)
-  })
-  document.body.appendChild(button)
+  button.style.display = "block";
 }
 
 // Render the game
@@ -206,6 +205,8 @@ function render() {
 
 // Game loop
 function gameLoop(timestamp) {
+  button.style.display = "none";
+
   var progress = (timestamp - lastRender)
   update(progress)
   // Handle ball collision with bottom wall

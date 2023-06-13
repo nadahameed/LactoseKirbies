@@ -14,6 +14,6 @@ def home(*args, **kwargs):
     # Fetch the user from the database
 
     if "username" in session:
-        return render_template("home.html")
+        return render_template("home.html", name=session["username"])
     else:
         return render_template("login.html")

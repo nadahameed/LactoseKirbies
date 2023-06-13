@@ -1,5 +1,6 @@
 # Hacks
 import sys
+import db.user as userdb 
 
 sys.path.append("..")
 
@@ -14,6 +15,7 @@ def home(*args, **kwargs):
     # Fetch the user from the database
 
     if "username" in session:
-        return render_template("crossyroad.html")
+        hs = userdb.getScore("crossy_high", session["username"])
+        return render_template("crossyroad.html", hs=hs)
     else:
         return render_template("login.html")
