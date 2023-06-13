@@ -6,10 +6,10 @@ sys.path.append("..")
 from flask import Blueprint, render_template, request, session
 
 # Create the blueprint
-crossy_bp = Blueprint('crossyroad', __name__)
+crossyroad_bp = Blueprint('crossyroad', __name__)
 
 
-@crossy_bp.route("/crossy")
+@crossyroad_bp.route("/crossyroad")
 def home(*args, **kwargs):
     # Fetch the user from the database
 
