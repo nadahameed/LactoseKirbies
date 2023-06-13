@@ -17,7 +17,7 @@ let ballSpeedY = 3; // Ball movement speed
 let score = 0;
 
 const ballImage = new Image();
-ballImage.src = "..static/assets/kirbyball.png"
+ballImage.src = "static/assets/kirbyball.png"
 
 const bgImage = new Image();
 // bgImage.onload = function() {
@@ -93,10 +93,10 @@ function drawPaddle() {
 // Draw the ball
 function drawBall() {
   context.fillStyle = "white";
-  //context.drawImage(ballImage, ballX, ballY, ballRadius*5, ballRadius*5)
   context.beginPath();
   context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
   context.fill();
+  context.drawImage(ballImage, ballX-ballRadius, ballY-ballRadius, ballRadius*2, ballRadius*2);
 }
 
 // Draw the blocks
