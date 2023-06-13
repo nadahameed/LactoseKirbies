@@ -169,20 +169,24 @@ function update(progress) {
 
   // Handle ball collision with blocks
   collisionDetection();
+}
 
-  // Handle ball collision with bottom wall
-  if (ballY + ballRadius > HEIGHT) {
-    // Reset ball position
-    ballX = WIDTH / 2;
-    ballY = HEIGHT / 2;
-    score = 0;
-  }
+function reset() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  const button = document.createElement('button')
+  button.innerText = 'RESTART?'
+  button.id = 'mainButton'
+  button.addEventListener('click', () => {
+    var lastRender = 0
+    window.requestAnimationFrame(gameLoop)
+  })
+  document.body.appendChild(button)
 }
 
 // Render the game
 function render() {
   // Clear the canvas
-  context.clearRect(0, 0, WIDTH, HEIGHT);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   //context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
   // Draw the paddle
@@ -204,9 +208,19 @@ function render() {
 function gameLoop(timestamp) {
   var progress = (timestamp - lastRender)
   update(progress)
-  render()
-  lastRender = timestamp
-  window.requestAnimationFrame(gameLoop)
+  // Handle ball collision with bottom wall
+  if (ballY + ballRadius <= HEIGHT) {
+    render()
+    lastRender = timestamp
+    window.requestAnimationFrame(gameLoop)
+  }
+  else {
+    // Reset ball position
+    ballX = WIDTH / 2;
+    ballY = HEIGHT / 2;
+    score = 0;
+    reset()
+  }
 }
 
 // Start the game loop
