@@ -17,13 +17,10 @@ let ballSpeedY = 3; // Ball movement speed
 let score = 0;
 
 const ballImage = new Image();
-ballImage.src = "..static/assets/kirbyball.png"
+ballImage.src = "data/kirbyball.png"
 
 const bgImage = new Image();
-// bgImage.onload = function() {
-//   context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-// };
-//bgImage.src = "..static/assets/background.png"
+bgImage.src = "data/background.png"
 
 
 // Block variables
@@ -92,10 +89,10 @@ function drawPaddle() {
 
 // Draw the ball
 function drawBall() {
-  context.fillStyle = "white";
-  //context.drawImage(ballImage, ballX, ballY, ballRadius*5, ballRadius*5)
+  //context.fillStyle = "white";
+  context.drawImage(ballImage, ballX, ballY, ballRadius*5, ballRadius*5)
   context.beginPath();
-  context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+  //context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
   context.fill();
 }
 
@@ -169,25 +166,21 @@ function update(progress) {
 
   // Handle ball collision with blocks
   collisionDetection();
-}
 
-function reset() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  const button = document.createElement('button')
-  button.innerText = 'RESTART?'
-  button.id = 'mainButton'
-  button.addEventListener('click', () => {
-    var lastRender = 0
-    window.requestAnimationFrame(gameLoop)
-  })
-  document.body.appendChild(button)
+  // Handle ball collision with bottom wall
+  if (ballY + ballRadius > HEIGHT) {
+    // Reset ball position
+    ballX = WIDTH / 2;
+    ballY = HEIGHT / 2;
+    score = 0;
+  }
 }
 
 // Render the game
 function render() {
   // Clear the canvas
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  //context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, WIDTH, HEIGHT);
+  context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
   // Draw the paddle
   drawPaddle();
@@ -208,19 +201,9 @@ function render() {
 function gameLoop(timestamp) {
   var progress = (timestamp - lastRender)
   update(progress)
-  // Handle ball collision with bottom wall
-  if (ballY + ballRadius <= HEIGHT) {
-    render()
-    lastRender = timestamp
-    window.requestAnimationFrame(gameLoop)
-  }
-  else {
-    // Reset ball position
-    ballX = WIDTH / 2;
-    ballY = HEIGHT / 2;
-    score = 0;
-    reset()
-  }
+  render()
+  lastRender = timestamp
+  window.requestAnimationFrame(gameLoop)
 }
 
 // Start the game loop
